@@ -1,0 +1,18 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.98"
+clap = { version = "4.5.43", features = ["derive", "env"] }
+dotenvy = "0.15.7"
+tokio = { version = "1.47.1", features = ["full"] }
+transmission-rpc = "0.5.0"
+
+[[bin]]
+name = "tx-set"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
