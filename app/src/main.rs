@@ -10,6 +10,11 @@ async fn main() -> anyhow::Result<()> {
 
     let mut client = tx::TransClient::new(run_config.tx_rpc.as_str().try_into()?);
 
+    println!(
+        "Setting peer port to {} on {}",
+        run_config.peer_port, run_config.tx_rpc
+    );
+
     client
         .session_set(SessionSetArgs {
             peer_port: Some(run_config.peer_port as _),
@@ -17,6 +22,10 @@ async fn main() -> anyhow::Result<()> {
         })
         .await
         .map_err(|e| anyhow!("{e}"))?;
+
+    // `transmission-remote` prints the following:
+    // localhost:9091/transmission/rpc/ responded: success
+    println!("Success.");
 
     Ok(())
 }
