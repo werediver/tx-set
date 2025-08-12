@@ -1,6 +1,6 @@
 use anyhow::anyhow;
 use clap::Parser;
-use transmission_rpc::{self as tx, types::SessionSetArgs};
+use transmission_rpc::{TransClient, types::SessionSetArgs};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -8,11 +8,11 @@ async fn main() -> anyhow::Result<()> {
 
     let run_config = RunConfig::parse();
 
-    let mut client = tx::TransClient::new(run_config.tx_rpc.as_str().try_into()?);
+    let mut client = TransClient::new(run_config.tr_rpc.as_str().try_into()?);
 
     println!(
         "Setting peer port to {} on {}",
-        run_config.peer_port, run_config.tx_rpc
+        run_config.peer_port, run_config.tr_rpc
     );
 
     client
@@ -34,7 +34,7 @@ async fn main() -> anyhow::Result<()> {
 struct RunConfig {
     /// Transmission RPC URL
     #[arg(long, env, default_value = "http://127.0.0.1:9091/transmission/rpc/")]
-    tx_rpc: String,
+    tr_rpc: String,
     /// Peer port to set
     #[arg(long)]
     peer_port: u32,
