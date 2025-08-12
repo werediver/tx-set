@@ -1,5 +1,4 @@
 {
-  "dockerComposeFile": "compose.yaml",
-  "service": "devcontainer",
+  "dockerFile": "Dockerfile",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
